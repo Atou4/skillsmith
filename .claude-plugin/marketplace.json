@@ -1,0 +1,17 @@
+{
+  "name": "skillsmith",
+  "owner": {
+    "name": "Atou4",
+    "url": "https://github.com/Atou4"
+  },
+  "description": "Meta skills for managing agent skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "skillsmith",
+      "source": "./",
+      "description": "Vet, install, audit and orchestrate agent skills.",
+      "category": "productivity",
+      "keywords": ["skills", "meta", "installer", "audit"]
+    }
+  ]
+}

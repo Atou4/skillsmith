@@ -1,0 +1,22 @@
+{
+  "name": "skillsmith",
+  "version": "0.1.0",
+  "description": "Meta skills for managing agent skills: vet a skill before installing it, install packs for Claude Code and Codex, audit what you have, and run projects through the right skill at each phase.",
+  "author": {
+    "name": "Atou4",
+    "url": "https://github.com/Atou4"
+  },
+  "homepage": "https://github.com/Atou4/skillsmith",
+  "repository": "https://github.com/Atou4/skillsmith",
+  "license": "MIT",
+  "keywords": ["skills", "meta", "skill-management", "installer", "audit", "orchestration"],
+  "skills": [
+    "./skills/meta/project-factory",
+    "./skills/meta/skill-audit",
+    "./skills/meta/skill-pack-installer",
+    "./skills/meta/skill-vetter",
+    "./skills/ui-ux/better-ui",
+    "./skills/ui-ux/emil-design-eng",
+    "./skills/ui-ux/ui-ux-pro-max"
+  ]
+}
