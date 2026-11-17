@@ -11,6 +11,7 @@ Works with Claude Code and Codex.
 | [`skill-vetter`](skills/meta/skill-vetter/SKILL.md) | You found a skill or pack and want to know if it is safe and worth installing. Produces a one-line verdict you can log. |
 | [`skill-pack-installer`](skills/meta/skill-pack-installer/SKILL.md) | You want a pack installed for Claude Code and Codex without overwriting skills you wrote, and verified afterwards. |
 | [`skill-audit`](skills/meta/skill-audit/SKILL.md) | You want to see broken links, duplicates, drift between agents and malformed skills. Read-only. |
+| [`skill-sync`](skills/meta/skill-sync/SKILL.md) | `skill-audit` found problems and you want them fixed: relink skills missing from an agent, remove dead links, reconcile duplicates. Proposes every change and asks first. |
 | [`project-factory`](skills/meta/project-factory/SKILL.md) | You are running a project end to end and want each phase (research, brand, UX, metrics, narrative, QA) routed to the best installed skill, with a living state file so work resumes cleanly. |
 
 ### UI/UX bundle (third-party, included unmodified)
@@ -43,7 +44,7 @@ Pick one route per agent. Installing both gives you every skill twice. Restart t
 ## How they fit together
 
 ```
-find a pack -> skill-vetter -> skill-pack-installer -> skill-audit
+find a pack -> skill-vetter -> skill-pack-installer -> skill-audit -> skill-sync
                                                            |
                        project-factory routes work to what is installed
 ```

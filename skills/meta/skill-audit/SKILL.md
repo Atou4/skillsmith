@@ -31,4 +31,5 @@ Optional: pass extra skill roots as arguments. Output is Markdown on stdout.
 1. Summarize counts per finding, then list only the findings, not every healthy skill.
 2. For each, propose a fix as a command but do not run it. Typical fixes: recreate a link, delete a dead link, rename a folder to match its `name`.
 3. Never recommend removing a user-managed skill. Removal applies only to what the user explicitly names.
-4. Remind the user that skill changes appear after restarting the session.
+4. Offer the `skill-sync` skill to apply the fixes, with approval for each change.
+5. Remind the user that skill changes appear after restarting the session.
