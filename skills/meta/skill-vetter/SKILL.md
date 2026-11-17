@@ -28,9 +28,20 @@ A skill is a set of instructions your agent will follow, plus sometimes scripts 
 
    For each hit, decide: expected for the stated purpose, or not. Record what each network call sends and where.
 
-5. **Requirements.** Environment variables, API keys, binaries (`uv`, Chrome, `ffmpeg`), paid services. Note what the user must supply and what leaves the machine.
+5. **Automated scan (optional).** If NVIDIA's SkillSpector is installed (`command -v skillspector`), run it on the folder as a second opinion:
 
-6. **Fit.** Does it overlap a skill already installed? Does it match how the user works? A safe skill that duplicates one you have is still a "skip".
+   ```bash
+   skillspector scan <skill-folder> --no-llm --format json
+   ```
+
+   - Always pass `--no-llm`. Its LLM mode sends the skill's text to a model provider (by default NVIDIA's hosted endpoint, which needs a key); only enable it if the user approves that and the skill is not private.
+   - Its dependency check may query OSV.dev, so package names and versions can leave the machine. Mention this to the user.
+   - Treat findings as leads: open each flagged file and decide for yourself. Treat a clean result as "no known patterns matched", not as proof of safety; an open ruleset can be written around.
+   - If it is not installed, say so in the verdict and continue with the manual steps. Do not install it as part of vetting.
+
+6. **Requirements.** Environment variables, API keys, binaries (`uv`, Chrome, `ffmpeg`), paid services. Note what the user must supply and what leaves the machine.
+
+7. **Fit.** Does it overlap a skill already installed? Does it match how the user works? A safe skill that duplicates one you have is still a "skip".
 
 ## Verdict
 

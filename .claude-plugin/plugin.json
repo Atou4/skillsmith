@@ -1,6 +1,6 @@
 {
   "name": "skillsmith",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Meta skills for managing agent skills: vet a skill before installing it, install packs for Claude Code and Codex, audit what you have, and run projects through the right skill at each phase.",
   "author": {
     "name": "Atou4",
