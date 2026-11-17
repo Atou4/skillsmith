@@ -63,7 +63,7 @@ find a pack -> skill-vetter -> skill-pack-installer -> skill-audit
 python3 scripts/validate-skills.py
 ```
 
-Checks frontmatter, that each `name` matches its folder, description length, that `plugin.json` lists every skill, and that no personal paths leaked in. New skills start from [`template/SKILL.md`](template/SKILL.md). See [`AGENTS.md`](AGENTS.md) and [`SCOPE.md`](SCOPE.md).
+Checks frontmatter, that each `name` matches its folder, description length, that `plugin.json` lists every skill, and that no personal paths leaked in. New skills start from [`template/SKILL.md.template`](template/SKILL.md). See [`AGENTS.md`](AGENTS.md) and [`SCOPE.md`](SCOPE.md).
 
 ## License
 

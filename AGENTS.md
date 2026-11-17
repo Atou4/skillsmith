@@ -6,7 +6,7 @@ Meta skills for managing agent skills. Read `SCOPE.md` before adding anything.
 
 - Skills live in `skills/<bucket>/<skill-name>/SKILL.md`. Buckets: `meta` (ours) and `ui-ux` (third-party, vendored unmodified; see `SCOPE.md` and `THIRD_PARTY_NOTICES.md`). Never edit a vendored skill here; refresh it from upstream and update the notices table.
 - Every skill must be listed in `.claude-plugin/plugin.json`.
-- New skills start from `template/SKILL.md`.
+- New skills start from `template/SKILL.md.template`.
 
 ## Authoring rules
 
