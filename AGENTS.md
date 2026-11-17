@@ -19,6 +19,10 @@ Meta skills for managing agent skills. Read `SCOPE.md` before adding anything.
 
 ## Validate before committing
 
+Full end-to-end check (plugin install, CLI discovery, audit fixture): `.agents/skills/verify-skillsmith/scripts/verify.sh all`. It is a dev-only skill, hidden from installers by `metadata.internal: true`. Edit the real copy under `.agents/skills/`; `.claude/skills/` and `.cursor/skills/` are symlinks.
+
+Quick check:
+
 ```bash
 python3 scripts/validate-skills.py
 ```

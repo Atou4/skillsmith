@@ -1,6 +1,6 @@
 ---
 name: skill-sync
-description: Fix drift between installed agent skills across ~/.claude/skills, ~/.codex/skills and ~/.agents/skills: relink skills missing from an agent, remove dead links, and reconcile duplicate copies, always proposing each change and asking first. Use after skill-audit reports problems, or when the user says "sync my skills", "why is this skill missing in Codex", or "make Claude and Codex have the same skills".
+description: Fix drift between installed agent skills across ~/.claude/skills, ~/.codex/skills and ~/.agents/skills. Relinks skills missing from an agent, removes dead links and reconciles duplicate copies, always proposing each change and asking first. Use after skill-audit reports problems, or when the user says "sync my skills", "why is this skill missing in Codex", or "make Claude and Codex have the same skills".
 ---
 
 # Skill sync

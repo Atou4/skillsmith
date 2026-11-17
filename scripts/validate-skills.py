@@ -25,6 +25,18 @@ for d in sorted(skill_dirs):
     if not m:
         err(f"{rel}: no frontmatter")
         continue
+    # Strict YAML parse when PyYAML is available (CI installs it). The skills CLI
+    # silently skips a skill whose frontmatter is invalid YAML, e.g. an unquoted
+    # ": " inside a description, so a regex check alone is not enough.
+    try:
+        import yaml
+
+        try:
+            yaml.safe_load(m.group(1))
+        except yaml.YAMLError as e:
+            err(f"{rel}: frontmatter is not valid YAML ({str(e).splitlines()[0]})")
+    except ImportError:
+        pass
     fm = {}
     key = None
     for line in m.group(1).splitlines():

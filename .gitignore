@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 node_modules/
+
+# Verification evidence (generated per run)
+.agents/skills/verify-skillsmith/artifacts/
