@@ -63,10 +63,17 @@ install() {
 
 discover() {
   before="$(dir_counts)/$(lock_mtime)"
-  (cd "$ISO" 2>/dev/null || cd /tmp; npx --yes skills add "$REPO" --list) > "$ART/skills-list-raw.txt" 2>&1 || { tail -5 "$ART/skills-list-raw.txt"; fail "npx skills --list"; }
+  (cd "$ISO" 2>/dev/null || cd /tmp; NO_COLOR=1 npx --yes skills add "$REPO" --list < /dev/null) > "$ART/skills-list-raw.txt" 2>&1 || { tail -5 "$ART/skills-list-raw.txt"; fail "npx skills --list"; }
   after="$(dir_counts)/$(lock_mtime)"
   [ "$before" = "$after" ] || fail "--list changed skill folders or lock file ($before -> $after)"
-  grep -E '^│    [a-z]' "$ART/skills-list-raw.txt" | sed 's/│ *//' | sort > "$ART/skills-list.txt"
+  # The CLI colors names when it does not detect an agent; strip ANSI codes before parsing.
+  python3 - "$ART/skills-list-raw.txt" > "$ART/skills-list.txt" <<'PY'
+import re, sys
+text = re.sub(r"\x1b\[[0-9;?]*[A-Za-z]", "", open(sys.argv[1], encoding="utf-8", errors="replace").read())
+names = sorted({m.group(1) for m in re.finditer(r"^│ {4}([a-z0-9][a-z0-9-]*)\s*$", text, re.M)})
+print("\n".join(names))
+PY
+  [ -s "$ART/skills-list.txt" ] || { tail -20 "$ART/skills-list-raw.txt"; fail "could not read any skill names from the CLI output"; }
   [ "$(cat "$ART/skills-list.txt")" = "$(repo_skill_names)" ] || { diff "$ART/skills-list.txt" <(repo_skill_names) || true; fail "CLI discovers a different set than the repo defines"; }
   ok "discover: CLI lists exactly the $(wc -l < "$ART/skills-list.txt" | tr -d ' ') repo skills; no skill folder or lock file changed"
 }
