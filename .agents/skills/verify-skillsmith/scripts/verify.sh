@@ -7,7 +7,8 @@
 #   directory, so your real ~/.claude is never modified.
 # - Evidence is written to artifacts/<RUN_ID>/ next to this skill and survives `clean`.
 # - Set RUN_ID to reuse a run across subcommands. Default: a timestamp.
-set -euo pipefail
+set -Eeuo pipefail
+trap 'rc=$?; echo "FAIL: verify.sh line $LINENO exited $rc running: $BASH_COMMAND" >&2' ERR
 
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 REPO="$(cd "$SKILL_DIR/../../.." && pwd)"
@@ -24,7 +25,7 @@ ok()   { echo "PASS: $*" | tee -a "$ART/summary.txt"; }
 repo_skill_names() { find "$REPO/skills" -name SKILL.md -exec dirname {} \; | xargs -n1 basename | sort; }
 market_plugins()   { python3 -c "import json; print(' '.join(p['name'] for p in json.load(open('$REPO/.claude-plugin/marketplace.json'))['plugins']))"; }
 plugin_version()   { python3 -c "import json; print({p['name']:p['version'] for p in json.load(open('$REPO/.claude-plugin/marketplace.json'))['plugins']}['$1'])"; }
-dir_counts()       { for d in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.agents/skills"; do printf '%s ' "$(ls -A "$d" 2>/dev/null | wc -l | tr -d ' ')"; done; }
+dir_counts()       { for d in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.agents/skills"; do if [ -d "$d" ]; then printf '%s ' "$(ls -A "$d" | wc -l | tr -d ' ')"; else printf 'none '; fi; done; }
 lock_mtime()       { f="$HOME/.agents/.skill-lock.json"; [ -f "$f" ] && (stat -f %m "$f" 2>/dev/null || stat -c %Y "$f") || echo none; }
 
 doctor() {
