@@ -18,7 +18,8 @@ For integrating an external service (payments, auth, messaging,
 analytics) into an existing multi-repo system, where several repos must
 agree on one contract.
 
-Not for greenfield platform work (a fresh PRD-to-build pipeline). This
+Not for greenfield platform work (a fresh PRD-to-build pipeline); use
+`platform-pipeline` for that. This
 skill assumes the repos exist, the domain is known, and the hard part is
 the seam between them.
 

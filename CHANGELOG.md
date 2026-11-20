@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 (2026-11-20)
+
+- New `platform-pipeline` in the `workflows` pack: PRD, artboards, a hard approval gate, visual research, then a build verified in the running app; Platform init once, then a Feature cycle per feature. Generalized from a personal version: dependency table with sources and fallbacks, project state in `docs/platform-pipeline.md`, no self-invoking build-discipline skill, the post-approval autonomy rule defined in the skill (still stops for destructive or outward-facing actions), and a routing note between it and `feature-forge`.
+- CI runs only when checked files change; SkillSpector only when `vendor.json` changes or by hand.
+
 ## 0.3.0 (2026-11-20)
 
 **Breaking for plugin users:** the single `skillsmith` plugin is now three packs. `skillsmith@skillsmith` contains only the meta skills; install `ui-ux@skillsmith` and `workflows@skillsmith` for the rest.

@@ -12,7 +12,7 @@ Agent skills for Claude Code and Codex, organized as packs you install separatel
 |---|---|---|
 | [`skillsmith`](skills/meta/) | 6 | Managing agent skills, and routing project work to the right skill |
 | [`ui-ux`](skills/ui-ux/) | 4 | Design direction, polish, motion, interaction feel (third-party, unmodified) |
-| [`workflows`](skills/workflows/) | 1 | Multi-step engineering workflows |
+| [`workflows`](skills/workflows/) | 2 | Multi-step engineering workflows |
 
 Each pack adds only its own skill descriptions to your sessions, so install the ones you use.
 
@@ -78,6 +78,7 @@ Licenses, sources and pinned commits are in [`THIRD_PARTY_NOTICES.md`](THIRD_PAR
 
 | Skill | Use it when |
 |---|---|
+| [`platform-pipeline`](skills/workflows/platform-pipeline/SKILL.md) | You are building a product from scratch, or adding the next feature to it. PRD, real artboards, a hard approval gate, visual research, then a build verified in the running app. |
 | [`feature-forge`](skills/workflows/feature-forge/SKILL.md) | You are integrating an external service (payments, auth, messaging) across several repos you own. Pins the shared contract first, grills it against failure modes that cost money or trust, and builds the verification harness before the handler. |
 
 ## Example: `skill-update-check`

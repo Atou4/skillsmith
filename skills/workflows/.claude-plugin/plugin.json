@@ -1,6 +1,6 @@
 {
   "name": "workflows",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": {
     "name": "Atou4",
     "url": "https://github.com/Atou4"
@@ -8,14 +8,17 @@
   "homepage": "https://github.com/Atou4/skillsmith",
   "repository": "https://github.com/Atou4/skillsmith",
   "license": "MIT",
-  "description": "Multi-step engineering workflows, starting with feature-forge: integrate an external service across several repos, contract first.",
+  "description": "Multi-step engineering workflows: platform-pipeline (PRD to verified build, with a design approval gate) and feature-forge (integrate an external service across several repos, contract first).",
   "keywords": [
-    "workflow",
+    "design-gate",
     "integration",
+    "multi-repo",
     "planning",
-    "multi-repo"
+    "prd",
+    "workflow"
   ],
   "skills": [
-    "./feature-forge"
+    "./feature-forge",
+    "./platform-pipeline"
   ]
 }
