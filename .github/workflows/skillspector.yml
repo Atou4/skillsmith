@@ -3,14 +3,18 @@ name: skillspector
 # Static security scan of every published skill with NVIDIA SkillSpector (no LLM stage, so no skill
 # text leaves the runner; its dependency check may query OSV.dev). Report-only for now: findings go
 # to the job summary and an artifact, and the job does not fail the build until a baseline is set.
+# The slowest job here (about 9 minutes), so it runs only when third-party skill content changes
+# (vendor.json is updated on every vendored refresh or addition) or by hand from the Actions tab.
 
 on:
   push:
     branches: [main]
-    paths: ["skills/**", ".github/workflows/skillspector.yml"]
-  pull_request:
-    paths: ["skills/**"]
+    paths: ["vendor.json"]
   workflow_dispatch:
+
+concurrency:
+  group: skillspector
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -18,6 +22,7 @@ permissions:
 jobs:
   scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -42,3 +47,4 @@ jobs:
         with:
           name: skillspector-reports
           path: reports/
+          retention-days: 7

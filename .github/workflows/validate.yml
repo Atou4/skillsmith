@@ -1,9 +1,32 @@
 name: validate
 
+# Runs only when something it checks changes; docs-only commits skip it.
 on:
   push:
     branches: [main]
+    paths:
+      - "skills/**"
+      - "scripts/**"
+      - ".claude-plugin/**"
+      - ".agents/**"
+      - "template/**"
+      - "vendor.json"
+      - "THIRD_PARTY_NOTICES.md"
+      - ".github/workflows/validate.yml"
   pull_request:
+    paths:
+      - "skills/**"
+      - "scripts/**"
+      - ".claude-plugin/**"
+      - ".agents/**"
+      - "template/**"
+      - "vendor.json"
+      - "THIRD_PARTY_NOTICES.md"
+      - ".github/workflows/validate.yml"
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -12,6 +35,7 @@ jobs:
   validate:
     name: Layout, manifests and frontmatter
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - name: Install PyYAML for strict frontmatter checks
@@ -22,6 +46,7 @@ jobs:
   behaviour:
     name: Install routes and scripts
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: validate
     steps:
       - uses: actions/checkout@v4

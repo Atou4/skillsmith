@@ -51,7 +51,7 @@ uv run --with pyyaml python scripts/validate-skills.py      # or: pip install py
 .agents/skills/verify-skillsmith/scripts/verify.sh all      # needs the claude CLI and npx
 ```
 
-CI runs the validator, the install-route checks that do not need the `claude` CLI, the vendored-copy check, and a report-only SkillSpector scan.
+CI is kept small. `validate` (about 30 seconds) runs only when skills, scripts, manifests or vendored files change, never for docs-only commits. The SkillSpector scan (about 9 minutes) runs only when `vendor.json` changes or by hand from the Actions tab. The upstream check runs once a week for a few seconds. Every job has a timeout, superseded runs are cancelled, and reports are kept for 7 days. Run `verify.sh all` locally before pushing rather than relying on CI.
 
 ## Releases
 
