@@ -132,6 +132,20 @@ for b in buckets:
     if pj.get("name") in plugin_names:
         err(f"{rel(pj_path)}: plugin name '{pj['name']}' is used twice")
     plugin_names.add(pj.get("name"))
+    icon = os.path.join(ROOT, "skills", b, ".claude-plugin", "icon.png")
+    if not os.path.isfile(icon):
+        err(f"{rel(pj_path)}: pack has no .claude-plugin/icon.png (copy assets/brand/icon-512.png)")
+    else:
+        with open(icon, "rb") as fh:
+            head = fh.read(24)
+        if head[:8] != b"\x89PNG\r\n\x1a\n":
+            err(f"{rel(icon)} is not a PNG")
+        else:
+            w, h = int.from_bytes(head[16:20], "big"), int.from_bytes(head[20:24], "big")
+            if w != h or not 512 <= w <= 2048:
+                err(f"{rel(icon)} is {w}x{h}; the plugin directory needs a square PNG of 512 to 2048 px")
+            if os.path.getsize(icon) > 2 * 1024 * 1024:
+                err(f"{rel(icon)} is over 2 MB")
     listed = {os.path.normpath(os.path.join("skills", b, p)) for p in pj.get("skills", [])}
     actual = {os.path.normpath(os.path.join("skills", b, s)) for (bb, s) in skills if bb == b}
     for p in sorted(listed - actual):

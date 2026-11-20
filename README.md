@@ -1,4 +1,9 @@
-# skillsmith
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/logo-dark.svg">
+    <img alt="skillsmith" src="assets/brand/logo-light.svg" width="420">
+  </picture>
+</p>
 
 [![validate](https://github.com/Atou4/skillsmith/actions/workflows/validate.yml/badge.svg)](https://github.com/Atou4/skillsmith/actions/workflows/validate.yml)
 [![release](https://img.shields.io/github/v/release/Atou4/skillsmith)](https://github.com/Atou4/skillsmith/releases)

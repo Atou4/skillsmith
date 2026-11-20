@@ -17,21 +17,19 @@ This copies `template/SKILL.md.template` and lists the skill in the pack's `plug
 - Per-user state lives in `~/.<skill-name>/`, never inside the skill folder; plugin updates replace the folder.
 - Skills that depend on other skills list them with a source and a fallback for when they are missing.
 
-## Add a pack (Flutter, React, GCP, ...)
+## Add a pack
+
+Packs are grouped by what the reader does, so a developer installs `mobile` or `devops` rather than one plugin per framework. The groups are listed in [`SCOPE.md`](SCOPE.md): `frontend`, `backend`, `mobile`, `infra`, `devops`, plus `meta`, `ui-ux` and `workflows`. Use an existing group; add a new one only when none fits, and only with its first finished skill.
 
 ```bash
 python3 scripts/scaffold.py pack <pack-folder> --description "<one sentence>" [--plugin-name <name>] [--category <category>]
 ```
 
-This creates `skills/<pack-folder>/.claude-plugin/plugin.json` and adds the pack to `.claude-plugin/marketplace.json`. Naming:
+This creates `skills/<pack-folder>/.claude-plugin/plugin.json` and `icon.png`, and adds the pack to `.claude-plugin/marketplace.json`.
 
-| Kind | Folder and plugin name | Examples |
-|---|---|---|
-| A framework or language | the framework | `flutter`, `react`, `react-native`, `python` |
-| A cloud or infrastructure area | the provider or area | `gcp`, `aws`, `firebase`, `supabase`, `docker`, `ci` |
-| A cross-cutting craft | the craft | `ui-ux`, `security`, `testing`, `workflows` |
-
-One pack per area keeps each plugin small, so users install only what they use. Split a pack when its skills serve different users; do not make one pack per skill.
+- Skills sit exactly two levels down (`skills/<pack>/<skill>/`) so every install route finds them, including plain `npx skills add`. Do not nest packs inside packs.
+- Skill names are unique across the whole repo and start with the technology, because one pack covers several: `flutter-performance`, `gcp-cloud-run`, `react-server-components`.
+- Split a pack only when its skills serve different readers; never make one pack per skill.
 
 ## Add a third-party skill
 

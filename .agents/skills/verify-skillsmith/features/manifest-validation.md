@@ -7,6 +7,7 @@ A contributor changes a skill or the plugin manifest and gets a clear failure fo
 - `validate-frontmatter` checks `name`, `description` and the name-equals-folder rule.
 - `validate-yaml` fails frontmatter that is not valid YAML (needs PyYAML).
 - `validate-manifest` checks that each pack's `plugin.json` lists every skill in its folder, and that `marketplace.json` lists every pack with a matching name and version.
+- `validate-icon` requires a square 512 to 2048 px PNG icon in every pack.
 - `validate-leaks` rejects home-directory paths and email addresses in SKILL.md files.
 - `validate-ci` runs the same checks on every push and pull request.
 
@@ -22,9 +23,10 @@ Preconditions:
 
 - `verify.sh doctor` passes.
 
-- **Positive.** Run `verify.sh static`. `artifacts/<RUN_ID>/validate-skills.txt` starts with `OK:` and `plugin-validate.txt` contains `Validation passed`. A missing-icon warning is expected and does not fail.
+- **Positive.** Run `verify.sh static`. `artifacts/<RUN_ID>/validate-skills.txt` starts with `OK:` and `plugin-validate.txt` contains `Validation passed`. Each pack's `.claude-plugin/icon.png` must be a square PNG of 512 to 2048 px; `claude plugin validate` reports no icon warning.
 - **Negative (YAML).** Copy the repo to a scratch directory, put an unquoted `: ` inside one skill's `description`, and run `uv run --with pyyaml python scripts/validate-skills.py` there. It exits 1 and names the skill with `frontmatter is not valid YAML`.
 - **Negative (manifest).** In the same scratch copy, remove one skill from `plugin.json`. The validator exits 1 with `plugin.json does not list skill`.
+- **Negative (icon).** In a scratch copy, delete one pack's `.claude-plugin/icon.png`. The validator exits 1 with `pack has no .claude-plugin/icon.png`.
 - **CI parity.** After pushing, `gh run list --repo Atou4/skillsmith --limit 1` shows `success` for the pushed commit.
 
 ## Gotchas

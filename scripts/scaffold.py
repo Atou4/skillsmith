@@ -13,6 +13,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,6 +52,7 @@ def pack(a):
         "keywords": [a.bucket], "skills": [],
     }
     dump(os.path.join(pdir, "plugin.json"), plugin)
+    shutil.copyfile(os.path.join(ROOT, "assets", "brand", "icon-512.png"), os.path.join(pdir, "icon.png"))
     market["plugins"].append({"name": name, "source": f"./skills/{a.bucket}", "description": a.description,
                               "version": version, "category": a.category, "keywords": [a.bucket]})
     dump(MARKET, market)

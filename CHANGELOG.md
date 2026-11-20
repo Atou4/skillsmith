@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 (2026-11-20)
+
+- Logo and icon: every pack now ships a square `icon.png`, the README has a header logo, and `assets/brand/` holds the logo, icon and social preview image.
+- Validator requires a 512 to 2048 px square PNG icon per pack; `scaffold.py pack` copies it.
+- Pack groups for stack skills defined in `SCOPE.md`: `frontend`, `backend`, `mobile`, `infra`, `devops` (each created with its first skill).
+
 ## 0.4.0 (2026-11-20)
 
 - New `platform-pipeline` in the `workflows` pack: PRD, artboards, a hard approval gate, visual research, then a build verified in the running app; Platform init once, then a Feature cycle per feature. Generalized from a personal version: dependency table with sources and fallbacks, project state in `docs/platform-pipeline.md`, no self-invoking build-discipline skill, the post-approval autonomy rule defined in the skill (still stops for destructive or outward-facing actions), and a routing note between it and `feature-forge`.
