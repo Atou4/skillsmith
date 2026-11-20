@@ -20,13 +20,13 @@ Preconditions:
 - `verify.sh doctor` passes.
 - Network access and `gh` for the unmodified check.
 
-- **License and notices (offline).** For each folder under `skills/ui-ux/`, run `test -f skills/ui-ux/<skill>/LICENSE` and `grep -c '`<skill>`' THIRD_PARTY_NOTICES.md`. Each file exists and each skill appears once.
-- **Unmodified (network).** Clone the upstream repo at the pinned commit from the notices table into a scratch directory, then run `diff -r <upstream skill folder> skills/ui-ux/<skill>`. The only difference allowed is the added `LICENSE` file.
-- **Install.** `verify.sh install` and `verify.sh discover` both list `better-ui`, `emil-design-eng` and `ui-ux-pro-max`.
+- **License and notices (offline).** `scripts/validate-skills.py` fails if any `vendor.json` entry lacks a `LICENSE` file or a `THIRD_PARTY_NOTICES.md` row naming the skill and its pinned commit.
+- **Unmodified (network).** Run `verify.sh vendor`. It hashes every local file as a git blob and compares with upstream's tree at the pinned commit. End state: `PASS: vendor: <n> vendored skills byte-identical to their pinned upstream`. A modified, missing or extra file (other than `LICENSE`) fails with the file names in `artifacts/<RUN_ID>/vendor.txt`.
+- **Install.** `verify.sh install` and `verify.sh discover` both list `better-motion`, `better-ui`, `emil-design-eng` and `ui-ux-pro-max`; the `ui-ux` plugin registers exactly those four.
 
 ## Gotchas
 
-- `verify.sh` does not automate the license, notices or unmodified checks yet; they are manual commands.
+- Upstream moves often. On 2026-11-20 `better-ui` lost its motion guidance to a new `better-motion` skill; refreshing one without the other would have dropped content. Read upstream commit titles before refreshing.
 - `ui-ux-pro-max` is about 3.7 MB. Its CSV data contains generic example paths such as `/Users/me/Desktop`; do not flag them as personal leaks.
 - Refresh a vendored skill from upstream and update the notices table together; never edit the copy.
 - The upstream repo for `ui-ux-pro-max` keeps the skill at `.claude/skills/ui-ux-pro-max`, not `skills/`.

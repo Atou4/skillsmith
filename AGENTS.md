@@ -1,12 +1,14 @@
 # skillsmith
 
-Meta skills for managing agent skills. Read `SCOPE.md` before adding anything.
+A marketplace of agent skill packs, one plugin per pack. Read `SCOPE.md` and `CONTRIBUTING.md` before adding anything.
 
 ## Layout
 
-- Skills live in `skills/<bucket>/<skill-name>/SKILL.md`. Buckets: `meta` (ours) and `ui-ux` (third-party, vendored unmodified; see `SCOPE.md` and `THIRD_PARTY_NOTICES.md`). Never edit a vendored skill here; refresh it from upstream and update the notices table.
-- Every skill must be listed in `.claude-plugin/plugin.json`.
-- New skills start from `template/SKILL.md.template`.
+- Skills live in `skills/<pack>/<skill-name>/SKILL.md`, exactly two levels down. Packs today: `meta` (plugin `skillsmith`), `ui-ux` (third-party, vendored unmodified), `workflows`.
+- Each pack has `skills/<pack>/.claude-plugin/plugin.json` listing all its skills, and an entry in `.claude-plugin/marketplace.json` with the same name and version.
+- Create packs and skills with `scripts/scaffold.py`; it keeps the manifests in sync.
+- Vendored skills are pinned in `vendor.json` and credited in `THIRD_PARTY_NOTICES.md`. Never edit one here; refresh it from upstream with the `skill-update-check` skill.
+- `.agents/skills/verify-skillsmith/` is a dev-only skill (`metadata.internal: true`); `.claude/skills/` and `.cursor/skills/` link to it. Any `SKILL.md` outside `skills/` must carry that flag, or installers offer it to users.
 
 ## Authoring rules
 
@@ -19,12 +21,12 @@ Meta skills for managing agent skills. Read `SCOPE.md` before adding anything.
 
 ## Validate before committing
 
-Full end-to-end check (plugin install, CLI discovery, audit fixture): `.agents/skills/verify-skillsmith/scripts/verify.sh all`. It is a dev-only skill, hidden from installers by `metadata.internal: true`. Edit the real copy under `.agents/skills/`; `.claude/skills/` and `.cursor/skills/` are symlinks.
+Full end-to-end check (every pack's plugin install, CLI discovery, audit fixture, vendored copies): `.agents/skills/verify-skillsmith/scripts/verify.sh all`.
 
 Quick check:
 
 ```bash
-python3 scripts/validate-skills.py
+uv run --with pyyaml python scripts/validate-skills.py
 ```
 
 Docs-only changes need no other checks. Run `python3 -I skills/meta/skill-audit/scripts/audit.py` after changing the audit script and read the output.

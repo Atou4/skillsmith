@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Verification helper for the skillsmith repo.
 #
-# Usage: scripts/verify.sh <doctor|static|install|discover|audit-fixture|clean|all>
+# Usage: scripts/verify.sh <doctor|static|install|discover|audit-fixture|vendor|clean|all>
 #
 # - Every Claude Code command runs with CLAUDE_CONFIG_DIR pointing at a throwaway
 #   directory, so your real ~/.claude is never modified.
@@ -22,16 +22,17 @@ fail() { echo "FAIL: $*" | tee -a "$ART/failures.txt" >&2; exit 1; }
 ok()   { echo "PASS: $*" | tee -a "$ART/summary.txt"; }
 
 repo_skill_names() { find "$REPO/skills" -name SKILL.md -exec dirname {} \; | xargs -n1 basename | sort; }
-plugin_version()   { python3 -c "import json,sys; print(json.load(open('$REPO/.claude-plugin/plugin.json'))['version'])"; }
+market_plugins()   { python3 -c "import json; print(' '.join(p['name'] for p in json.load(open('$REPO/.claude-plugin/marketplace.json'))['plugins']))"; }
+plugin_version()   { python3 -c "import json; print({p['name']:p['version'] for p in json.load(open('$REPO/.claude-plugin/marketplace.json'))['plugins']}['$1'])"; }
 dir_counts()       { for d in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.agents/skills"; do printf '%s ' "$(ls -A "$d" 2>/dev/null | wc -l | tr -d ' ')"; done; }
 lock_mtime()       { f="$HOME/.agents/.skill-lock.json"; [ -f "$f" ] && (stat -f %m "$f" 2>/dev/null || stat -c %Y "$f") || echo none; }
 
 doctor() {
   { echo "repo: $REPO"; echo "run: $RUN_ID"; echo "claude: $(claude --version 2>&1 | head -1)"; echo "python3: $(python3 --version)"
     echo "uv: $(command -v uv || echo MISSING)"; echo "npx: $(command -v npx || echo MISSING)"
-    echo "plugin.json version: $(plugin_version)"; echo "skills in repo: $(repo_skill_names | tr '\n' ' ')"
+    echo "plugins: $(for p in $(market_plugins); do printf '%s@%s ' "$p" "$(plugin_version "$p")"; done)"; echo "skills in repo: $(repo_skill_names | tr '\n' ' ')"
     echo "git dirty files: $(git -C "$REPO" status --short | wc -l | tr -d ' ')"; } | tee "$ART/doctor.txt"
-  [ -f "$REPO/.claude-plugin/plugin.json" ] || fail "no plugin.json under $REPO"
+  [ -f "$REPO/.claude-plugin/marketplace.json" ] || fail "no marketplace.json under $REPO"
   command -v claude >/dev/null || fail "claude CLI not found"
   command -v npx >/dev/null || fail "npx not found"
   ok "doctor"
@@ -47,14 +48,16 @@ static() {
 }
 
 install() {
-  { claude plugin marketplace add "$REPO"; claude plugin install skillsmith@skillsmith; claude plugin list; claude plugin details skillsmith; } > "$ART/install.txt" 2>&1 \
-    || { cat "$ART/install.txt"; fail "plugin add/install"; }
-  want="$(plugin_version)"
-  grep -q "Version: $want" "$ART/install.txt" || fail "installed version is not $want"
-  grep -q "Read from: $REPO" "$ART/install.txt" || fail "plugin was not read from $REPO"
+  claude plugin marketplace add "$REPO" > "$ART/install.txt" 2>&1 || { cat "$ART/install.txt"; fail "marketplace add"; }
+  for p in $(market_plugins); do
+    { claude plugin install "$p@skillsmith"; claude plugin details "$p"; } >> "$ART/install.txt" 2>&1 || { cat "$ART/install.txt"; fail "install $p"; }
+    grep -qE "^$p $(plugin_version "$p")$" "$ART/install.txt" || fail "plugin $p is not at version $(plugin_version "$p")"
+  done
+  claude plugin list >> "$ART/install.txt" 2>&1
+  grep -q "Read from: $REPO" "$ART/install.txt" || fail "plugins were not read from $REPO"
   got="$(grep -E '^ *Skills \(' "$ART/install.txt" | sed -E 's/^ *Skills \([0-9]+\) *//' | tr ',' '\n' | sed 's/ //g' | sort)"
   [ "$got" = "$(repo_skill_names)" ] || { diff <(echo "$got") <(repo_skill_names) || true; fail "installed skills differ from repo skills"; }
-  ok "install: version $want, $(echo "$got" | wc -l | tr -d ' ') skills registered from the working tree"
+  ok "install: plugins $(market_plugins | tr ' ' ','); $(echo "$got" | wc -l | tr -d ' ') skills registered from the working tree"
 }
 
 discover() {
@@ -79,6 +82,14 @@ audit_fixture() {
   ok "audit-fixture: 1 broken symlink and 2 malformed skills found in a known-bad fixture"
 }
 
+vendor() {
+  python3 -I "$REPO/skills/meta/skill-update-check/scripts/check_updates.py" --vendor "$REPO/vendor.json" --verify-local > "$ART/vendor.txt" 2>&1
+  rc=$?
+  [ $rc -ne 2 ] || { cat "$ART/vendor.txt"; fail "a vendored copy differs from its pinned upstream"; }
+  grep -q "identical to" "$ART/vendor.txt" || { cat "$ART/vendor.txt"; fail "vendor check produced no result (network or rate limit?)"; }
+  ok "vendor: $(grep -c 'identical to' "$ART/vendor.txt" | tr -d ' ') vendored skills byte-identical to their pinned upstream; upstream status: $(grep -E '^\| (changed|up to date) ' "$ART/vendor.txt" | tr -d '|' | xargs)"
+}
+
 clean() {
   claude plugin marketplace remove skillsmith >/dev/null 2>&1 || true
   rm -rf "$ISO"
@@ -87,7 +98,7 @@ clean() {
 
 case "${1:-}" in
   doctor) doctor ;; static) static ;; install) install ;; discover) discover ;;
-  audit-fixture) audit_fixture ;; clean) clean ;;
-  all) trap clean EXIT; doctor; static; install; discover; audit_fixture; echo "ALL PASSED. Evidence: $ART" ;;
-  *) echo "usage: $0 <doctor|static|install|discover|audit-fixture|clean|all>" >&2; exit 2 ;;
+  audit-fixture) audit_fixture ;; vendor) vendor ;; clean) clean ;;
+  all) trap clean EXIT; doctor; static; install; discover; audit_fixture; vendor; echo "ALL PASSED. Evidence: $ART" ;;
+  *) echo "usage: $0 <doctor|static|install|discover|audit-fixture|vendor|clean|all>" >&2; exit 2 ;;
 esac

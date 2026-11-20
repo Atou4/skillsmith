@@ -6,7 +6,7 @@ A contributor changes a skill or the plugin manifest and gets a clear failure fo
 
 - `validate-frontmatter` checks `name`, `description` and the name-equals-folder rule.
 - `validate-yaml` fails frontmatter that is not valid YAML (needs PyYAML).
-- `validate-manifest` checks that `plugin.json` lists every skill and nothing missing.
+- `validate-manifest` checks that each pack's `plugin.json` lists every skill in its folder, and that `marketplace.json` lists every pack with a matching name and version.
 - `validate-leaks` rejects home-directory paths and email addresses in SKILL.md files.
 - `validate-ci` runs the same checks on every push and pull request.
 

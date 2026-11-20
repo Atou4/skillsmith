@@ -1,0 +1,21 @@
+{
+  "name": "workflows",
+  "version": "0.3.0",
+  "author": {
+    "name": "Atou4",
+    "url": "https://github.com/Atou4"
+  },
+  "homepage": "https://github.com/Atou4/skillsmith",
+  "repository": "https://github.com/Atou4/skillsmith",
+  "license": "MIT",
+  "description": "Multi-step engineering workflows, starting with feature-forge: integrate an external service across several repos, contract first.",
+  "keywords": [
+    "workflow",
+    "integration",
+    "planning",
+    "multi-repo"
+  ],
+  "skills": [
+    "./feature-forge"
+  ]
+}

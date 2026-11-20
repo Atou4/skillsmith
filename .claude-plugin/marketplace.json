@@ -4,14 +4,48 @@
     "name": "Atou4",
     "url": "https://github.com/Atou4"
   },
-  "description": "Meta skills for managing agent skills, as an installable Claude Code plugin.",
+  "description": "Agent skills by Atou4, one plugin per pack: meta skills for managing skills, a UI/UX bundle, and engineering workflows. Install only the packs you want.",
   "plugins": [
     {
       "name": "skillsmith",
-      "source": "./",
-      "description": "Vet, install, audit and orchestrate agent skills.",
+      "source": "./skills/meta",
+      "description": "Meta skills for managing agent skills: vet, install, audit, sync and update-check them, and route project work to the right skill.",
+      "version": "0.3.0",
       "category": "productivity",
-      "keywords": ["skills", "meta", "installer", "audit"]
+      "keywords": [
+        "skills",
+        "meta",
+        "skill-management",
+        "installer",
+        "audit"
+      ]
+    },
+    {
+      "name": "ui-ux",
+      "source": "./skills/ui-ux",
+      "description": "UI/UX skills by Next Level Builder, Emil Kowalski and Jakub Krehel, included unmodified under MIT: design direction, polish, motion and interaction feel.",
+      "version": "0.3.0",
+      "category": "design",
+      "keywords": [
+        "ui",
+        "ux",
+        "design",
+        "motion",
+        "accessibility"
+      ]
+    },
+    {
+      "name": "workflows",
+      "source": "./skills/workflows",
+      "description": "Multi-step engineering workflows, starting with feature-forge: integrate an external service across several repos, contract first.",
+      "version": "0.3.0",
+      "category": "engineering",
+      "keywords": [
+        "workflow",
+        "integration",
+        "planning",
+        "multi-repo"
+      ]
     }
   ]
 }

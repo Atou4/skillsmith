@@ -1,0 +1,27 @@
+{
+  "name": "skillsmith",
+  "version": "0.3.0",
+  "author": {
+    "name": "Atou4",
+    "url": "https://github.com/Atou4"
+  },
+  "homepage": "https://github.com/Atou4/skillsmith",
+  "repository": "https://github.com/Atou4/skillsmith",
+  "license": "MIT",
+  "description": "Meta skills for managing agent skills: vet, install, audit, sync and update-check them, and route project work to the right skill.",
+  "keywords": [
+    "skills",
+    "meta",
+    "skill-management",
+    "installer",
+    "audit"
+  ],
+  "skills": [
+    "./project-factory",
+    "./skill-audit",
+    "./skill-pack-installer",
+    "./skill-sync",
+    "./skill-update-check",
+    "./skill-vetter"
+  ]
+}

@@ -1,0 +1,43 @@
+name: upstream
+
+# Weekly: have any vendored third-party skills changed upstream since we pinned them?
+# Opens one issue (or comments on the open one) listing the new upstream commits.
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare vendored pins with upstream
+        id: check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          python3 -I skills/meta/skill-update-check/scripts/check_updates.py --vendor vendor.json --fail-on-changes > report.md
+          rc=$?
+          if [ "$rc" -eq 1 ]; then echo "changed=yes" >> "$GITHUB_OUTPUT"; else echo "changed=no" >> "$GITHUB_OUTPUT"; fi
+          if [ "$rc" -ne 0 ] && [ "$rc" -ne 1 ]; then cat report.md; exit "$rc"; fi
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Open or update the upstream-changes issue
+        if: steps.check.outputs.changed == 'yes'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          title="Vendored skills changed upstream"
+          {
+            cat report.md
+            echo
+            echo "Refresh with the skill-update-check skill: replace each changed folder with upstream, keep LICENSE, update vendor.json and THIRD_PARTY_NOTICES.md, then run verify-skillsmith."
+          } > body.md
+          num=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')
+          if [ -n "$num" ]; then gh issue comment "$num" --body-file body.md; else gh issue create --title "$title" --body-file body.md; fi

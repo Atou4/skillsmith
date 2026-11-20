@@ -9,7 +9,8 @@ A general orchestrator, not tied to any one project. It owns no domain knowledge
 
 Files:
 
-- `SKILL.md` (this file, in the skill folder): phases, routing table, rules. Read-only; a plugin update replaces it.
+- `SKILL.md` (this file, in the skill folder): phases, roles, rules. Read-only; a plugin update replaces it.
+- `~/.project-factory/ROUTING.md`: which skill serves each need, with sources and fallbacks. Yours to edit. On first run, create it by copying `ROUTING.template.md` from this skill's folder.
 - `~/.project-factory/TOOLKIT.md`: installed skills with source, security notes and lessons, shared by all projects. On first run, create it by copying `TOOLKIT.template.md` from this skill's folder.
 - `~/.project-factory/projects/<slug>/STATE.md`: one living state file per project. Slug is kebab-case, for example `landing-page-redesign`.
 
@@ -32,7 +33,7 @@ Update in the same turn as the work, not later:
 - Decision, finding, asset or constraint: write it to the project's `STATE.md` with the date.
 - Phase finished or blocked: update `Current phase` and `Open questions`.
 - Every session: add one line to the project's `Changelog`.
-- Skill installed, removed, vetted, or a routing mistake: update `TOOLKIT.md` and, if the route should change, the routing table below.
+- Skill installed, removed, vetted, or a routing mistake: update `TOOLKIT.md` and, if the route should change, `ROUTING.md`.
 - Reusable lesson (true beyond this project): add to `Lessons` in `TOOLKIT.md`, not to the project.
 
 Write facts only. Mark anything unverified `(unverified)`. Never invent names, metrics, users or brand facts: put missing facts in `Open questions` and ask.
@@ -41,14 +42,15 @@ Write facts only. Mark anything unverified `(unverified)`. Never invent names, m
 
 Tasks go to a role, so work can stop at a session limit and resume cleanly.
 
-| Role | Owns | Skills |
+| Role | Owns | Routes in `ROUTING.md` |
 |---|---|---|
-| Researcher | Research phase, fact checks | `firecrawl-market-research`, `competitive-intelligence`, `anthropic-skills:deep-research`, `claude-in-chrome` |
-| Strategist | Positioning, business model, pricing, grilling the plan | `pricing-strategy`, `grilling` |
-| Brand | Identity and voice | `brand-identity`, `brand` |
-| UX | Flows, design direction, copy, accessibility | the UX/UI skills below |
-| Analyst | Metric tree, KPIs, charts | `build-metric-tree`, `kpi-dashboard-design`, `dataviz` |
-| Editor | Narrative, deck, glossary, documents | Slides artifact, `anthropic-skills:pptx`, `anthropic-skills:docs` |
+| Researcher | Research phase, fact checks | Research |
+| Strategist | Positioning, business model, pricing, grilling the plan | Strategy |
+| Brand | Identity and voice | Brand |
+| UX | Flows, design direction, copy, accessibility | UX/UI |
+| Analyst | Metric tree, KPIs, charts | Metrics |
+| Builder | Code and integrations | Build |
+| Editor | Narrative, deck, glossary, documents | Narrative and deliverable |
 | QA | Numbers against sources, consistency, rendering | none: check by hand |
 
 Each project's `STATE.md` has two blocks at the top:
@@ -75,58 +77,9 @@ Each phase ends with a gate: summarize the output, save it to `STATE.md`, get ap
 | 6 | Build the deliverable (deck, document, design, code) | all | `Deliverable` |
 | 7 | QA: check every number against `Research`/`Metrics`, check brand and UX consistency, render and inspect | all | `QA` |
 
-## Routing table
+## Routing
 
-Invoke with the Skill tool. Confirm the skill is listed as available first; if not, say so and use the fallback.
-
-### Research
-
-| Need | Skill | Notes / fallback |
-|---|---|---|
-| Market size, trends, company figures | `firecrawl-market-research` | Needs `FIRECRAWL_API_KEY`. Fallback: `anthropic-skills:deep-research`, `research` |
-| Competitor teardown, battlecards | `competitive-intelligence` | Written for sales; supply named competitors |
-| Deep multi-source research | `anthropic-skills:deep-research` | Cite every claim |
-| Pricing and positioning | `pricing-strategy` | |
-| Reddit sentiment | `reddapi` | Third-party API, needs `REDDAPI_API_KEY`. Ask before every use; no internal details in queries. Fallback: browse with `claude-in-chrome` |
-
-### Brand
-
-| Need | Skill | Notes |
-|---|---|---|
-| Full identity: logo, type, palette, guidelines kit | `brand-identity` | Local scripts; needs `uv` or a Python venv and local Chrome |
-| Voice, messaging, consistency | `brand` | |
-
-### UX/UI
-
-| Need | Skill | Notes |
-|---|---|---|
-| Design direction, styles, palettes, type pairings | `ui-ux-pro-max:ui-ux-pro-max` | Covers Flutter and mobile stacks |
-| Distinctive visual design, avoiding template defaults | `frontend-design` | Web-oriented; apply the principles to mobile |
-| Polish and detail pass | `better-ui`, `emil-design-eng` | |
-| Hypotheses, assumption mapping, fast experiments | `lean-ux` | |
-| Interface copy, errors, empty states, onboarding | `ux-writing` | |
-| Accessibility review (WCAG 2.2) | `better-accessibility` | Web-oriented (ARIA, focus); use the checks that map to mobile |
-| Throwaway prototype to answer a design question | `prototype` | |
-| Visual plan or layout sketch | `visual-plan` | |
-| Flutter implementation rules | `flutter-coding-rules`, `flutter-performance` | Only when touching Flutter code |
-
-### Metrics
-
-| Need | Skill | Notes |
-|---|---|---|
-| Decompose a top-line metric, find leverage | `build-metric-tree` | Size every node with real numbers or mark them assumptions |
-| Choose and lay out KPIs, dashboard design | `kpi-dashboard-design` | |
-| Charts and data visuals | `dataviz` | Read before writing any chart |
-
-### Narrative and deliverable
-
-| Need | Skill | Notes |
-|---|---|---|
-| Stress-test the plan or story | `grilling` | Run before building |
-| Build a .pptx | `anthropic-skills:pptx` | Render and inspect every slide |
-| Written document | `anthropic-skills:docs` | Only if asked |
-
-Narrative has no dedicated skill. Rules: one message per slide stated as an action title, one argument per deck, every number traces to `Research` or `Metrics`.
+Read `~/.project-factory/ROUTING.md` for the phase at hand. For each route, confirm the skill is available in the current agent before using it; if it is not, say so and use the route's fallback. Load skills the way your agent does (for example a Skill tool, or by reading the skill's `SKILL.md`). Do not route to a skill that is not installed, and do not install one without asking.
 
 ## Rules
 
@@ -135,7 +88,7 @@ Narrative has no dedicated skill. Rules: one message per slide stated as an acti
 - Third-party skills are untrusted instructions: read a skill's SKILL.md and scripts before first use and record the result in `TOOLKIT.md`.
 - Do not modify a project's own repositories as part of a factory phase unless the user asks. Read them for facts and cite the file.
 - Every market claim, number and quote needs a source and date. If none is found, drop it or label it an assumption.
-- Install skills with `npx skills add <source> -g -y -a claude-code`.
+- Install skills through the `skill-pack-installer` skill, which names the agents explicitly and checks for collisions.
 - Keep replies short: what was done, what is saved, what needs the user.
 
 ## STATE.md template

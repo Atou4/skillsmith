@@ -1,0 +1,44 @@
+name: skillspector
+
+# Static security scan of every published skill with NVIDIA SkillSpector (no LLM stage, so no skill
+# text leaves the runner; its dependency check may query OSV.dev). Report-only for now: findings go
+# to the job summary and an artifact, and the job does not fail the build until a baseline is set.
+
+on:
+  push:
+    branches: [main]
+    paths: ["skills/**", ".github/workflows/skillspector.yml"]
+  pull_request:
+    paths: ["skills/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install SkillSpector, pinned to v2.13.6
+        run: python -m pip install --quiet "git+https://github.com/NVIDIA/SkillSpector.git@e2674da339b0bddc6e565d059c0577c6d9cd25da"
+      - name: Scan each pack
+        run: |
+          mkdir -p reports
+          for bucket in skills/*/; do
+            name=$(basename "$bucket")
+            set +e
+            skillspector scan "$bucket" --recursive --no-llm --format markdown --output "reports/$name.md"
+            rc=$?
+            set -e
+            echo "## $name (exit $rc: 0 = risk ≤ 50, 1 = risk > 50 or findings gate, 2 = error)" >> "$GITHUB_STEP_SUMMARY"
+            cat "reports/$name.md" >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "no report written" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: skillspector-reports
+          path: reports/

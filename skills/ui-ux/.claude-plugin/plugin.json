@@ -1,0 +1,25 @@
+{
+  "name": "ui-ux",
+  "version": "0.3.0",
+  "author": {
+    "name": "Atou4",
+    "url": "https://github.com/Atou4"
+  },
+  "homepage": "https://github.com/Atou4/skillsmith",
+  "repository": "https://github.com/Atou4/skillsmith",
+  "license": "MIT",
+  "description": "UI/UX skills by Next Level Builder, Emil Kowalski and Jakub Krehel, included unmodified under MIT: design direction, polish, motion and interaction feel.",
+  "keywords": [
+    "ui",
+    "ux",
+    "design",
+    "motion",
+    "accessibility"
+  ],
+  "skills": [
+    "./better-motion",
+    "./better-ui",
+    "./emil-design-eng",
+    "./ui-ux-pro-max"
+  ]
+}

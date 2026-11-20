@@ -1,0 +1,45 @@
+{
+  "_comment": "Third-party skills vendored unmodified. scripts/check-upstream.py and the skill-update-check skill read this file. Keep THIRD_PARTY_NOTICES.md in step.",
+  "skills": [
+    {
+      "skill": "better-motion",
+      "bucket": "ui-ux",
+      "author": "Jakub Krehel",
+      "repo": "jakubkrehel/skills",
+      "path": "skills/better-motion",
+      "commit": "672ae44ace6aaed65b86cbb1e2fd6fbea0e79578",
+      "license": "MIT",
+      "copied": "2026-11-20"
+    },
+    {
+      "skill": "better-ui",
+      "bucket": "ui-ux",
+      "author": "Jakub Krehel",
+      "repo": "jakubkrehel/skills",
+      "path": "skills/better-ui",
+      "commit": "672ae44ace6aaed65b86cbb1e2fd6fbea0e79578",
+      "license": "MIT",
+      "copied": "2026-11-20"
+    },
+    {
+      "skill": "emil-design-eng",
+      "bucket": "ui-ux",
+      "author": "Emil Kowalski",
+      "repo": "emilkowalski/skills",
+      "path": "skills/emil-design-eng",
+      "commit": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c",
+      "license": "MIT",
+      "copied": "2026-11-20"
+    },
+    {
+      "skill": "ui-ux-pro-max",
+      "bucket": "ui-ux",
+      "author": "Next Level Builder",
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "path": ".claude/skills/ui-ux-pro-max",
+      "commit": "2de1134dc4d1cfe112934611ae5803ae17a1bd7e",
+      "license": "MIT",
+      "copied": "2026-11-20"
+    }
+  ]
+}

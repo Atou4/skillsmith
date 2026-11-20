@@ -1,16 +1,21 @@
 # Scope
 
+skillsmith is a marketplace of skill packs. Each pack is one plugin that users install separately.
+
 ## In scope
 
-- **`skills/meta/`**: skills about skills. Finding, vetting, installing, auditing, routing and maintaining them, plus orchestration skills that decide which other skill runs next and keep resumable state. Written and supported by the maintainer.
-- **`skills/ui-ux/`**: a separate bucket of third-party UI/UX skills, included unmodified so they install together with the meta skills. Only MIT-or-similarly-permissive skills, each keeping its upstream `LICENSE`, each listed in `THIRD_PARTY_NOTICES.md` with source and pinned commit.
+- **`skills/meta/` (plugin `skillsmith`)**: skills about skills. Finding, vetting, installing, auditing, syncing, update-checking and routing. Written and supported by the maintainer.
+- **`skills/workflows/` (plugin `workflows`)**: multi-step engineering workflows that coordinate other skills, such as integrating a service across several repos.
+- **Stack and infrastructure packs** (for example `flutter`, `react`, `gcp`): skills for one framework, language, cloud or infrastructure area, either written by the maintainer or vendored under the third-party rules below.
+- **Third-party packs** (for example `skills/ui-ux/`): skills by other authors, included unmodified so they install together. Only licenses that allow redistribution (MIT, Apache-2.0, BSD); each keeps its upstream `LICENSE`, is pinned in `vendor.json` and credited in `THIRD_PARTY_NOTICES.md`.
 
 ## Out of scope
 
-- Other domain skills (research, Flutter, marketing and so on) unless they are added as a clearly labelled third-party bucket under the same rules.
 - Third-party skills without a license that allows redistribution. Link to the source instead.
-- Anything tied to one person's project, employer or private data.
+- Edited copies of third-party skills. Vendored skills are refreshed from upstream, never changed here.
+- Anything tied to one person's project, employer or private data. Examples use invented names and paths.
+- One-off prompts that are not repeatable workflows.
 
 ## Growing
 
-A new bucket is added only for skills the maintainer wrote and can support, or for third-party skills that meet the rules above. Each addition updates `plugin.json` and passes `scripts/validate-skills.py`. Vendored skills are refreshed from upstream, never edited here.
+Add a pack only when there is at least one finished skill for it; empty placeholder packs are not published. Each addition goes through `scripts/scaffold.py` and passes `scripts/validate-skills.py`. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
