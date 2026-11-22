@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1 (2026-11-22)
+
+- `devops`: added `flutter-ci-debugging`, an original skill for Flutter builds that fail, stall or are killed on GitHub-hosted runners: evidence with `gh`, failure signatures, Gradle sizing for the runner, Jetifier, per-app caches and local measurement.
+
 ## 0.6.0 (2026-11-22)
 
 - New `devops` pack with its first skill, `gcp-cloud-run-ops`, written for this repository. It deploys, verifies, rolls back and diagnoses Google Cloud Run services: images by digest, revisions created with `--no-traffic`, traffic shifted with `--to-latest --clear-tags` only after they start, and an explicit yes before any production change. It ships two read-only scripts (`verify_deploy.py`, `cloudrun_snapshot.py`), an optional `.cloud-run-ops.json` project profile, a billing SKU map, log recipes and a troubleshooting table. Install with `devops@skillsmith`.

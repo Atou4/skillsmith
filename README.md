@@ -19,7 +19,7 @@ Agent skills for Claude Code and Codex, organized as packs you install separatel
 | [`ui-ux`](skills/ui-ux/) | 4 | Design direction, polish, motion, interaction feel (third-party, unmodified) |
 | [`workflows`](skills/workflows/) | 2 | Multi-step engineering workflows |
 | [`mobile`](skills/mobile/) | 4 | Phone and tablet apps: Flutter performance, security, testing and error handling (third-party, unmodified) |
-| [`devops`](skills/devops/) | 1 | Build, ship and run: deploy, verify, roll back and diagnose Google Cloud Run |
+| [`devops`](skills/devops/) | 2 | Build, ship and run: Google Cloud Run operations and Flutter CI debugging |
 
 Each pack adds only its own skill descriptions to your sessions, so install the ones you use.
 
@@ -107,6 +107,7 @@ All four come from [agent-skills-standard](https://github.com/hoangnguyen0403/ag
 
 | Skill | Use it when |
 |---|---|
+| [`flutter-ci-debugging`](skills/devops/flutter-ci-debugging/SKILL.md) | A Flutter build fails, stalls or is killed on GitHub Actions (exit 143, `Java heap space`, `JetifyTransform`, no space left). Reads the evidence with `gh`, classifies the failure, sizes Gradle for the runner, checks whether Jetifier can go, and measures before pushing. |
 | [`gcp-cloud-run-ops`](skills/devops/gcp-cloud-run-ops/SKILL.md) | You deploy, verify, roll back or diagnose Cloud Run services. Images by digest, revisions created without traffic, traffic shifted only after they start, tags cleared so 0% revisions stop billing warm instances, and a production yes before any change. Ships two read-only scripts: a post-deploy check and a cost and traffic snapshot. |
 
 ## Good skills we link to instead of copying
