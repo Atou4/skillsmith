@@ -16,7 +16,7 @@ skillsmith is a marketplace of skill packs. Each pack is one plugin that users i
   | `infra` | Cloud services and provisioning | `gcp-...`, `aws-...`, `firebase-...`, `terraform-...` |
   | `devops` | Build, ship and run: pipelines, containers, observability | `github-actions-...`, `docker-...`, `kubernetes-...` |
 
-  A skill goes where its reader works, not where its technology is from: a Flutter CI pipeline is `devops`, Flutter widget performance is `mobile`. A pack is published when its first skill is finished (see Growing). `mobile` is published; `devops` exists only as an empty reserved folder (`skills/devops/.gitkeep`) with no plugin; `frontend`, `backend` and `infra` do not exist yet.
+  A skill goes where its reader works, not where its technology is from: a Flutter CI pipeline is `devops`, Flutter widget performance is `mobile`. A pack is published when its first skill is finished (see Growing). `mobile` and `devops` are published; `frontend`, `backend` and `infra` do not exist yet.
 - **Third-party packs** (for example `skills/ui-ux/`): skills by other authors, included unmodified so they install together. Only licenses that allow redistribution (MIT, Apache-2.0, BSD); each keeps its upstream `LICENSE`, is pinned in `vendor.json` and credited in `THIRD_PARTY_NOTICES.md`.
 
 ## Out of scope

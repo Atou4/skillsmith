@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0 (2026-11-22)
+
+- New `devops` pack with its first skill, `gcp-cloud-run-ops`, written for this repository. It deploys, verifies, rolls back and diagnoses Google Cloud Run services: images by digest, revisions created with `--no-traffic`, traffic shifted with `--to-latest --clear-tags` only after they start, and an explicit yes before any production change. It ships two read-only scripts (`verify_deploy.py`, `cloudrun_snapshot.py`), an optional `.cloud-run-ops.json` project profile, a billing SKU map, log recipes and a troubleshooting table. Install with `devops@skillsmith`.
+- The reserved `skills/devops/.gitkeep` is replaced by the pack.
+
 ## 0.5.2 (2026-11-22)
 
 - `ui-ux-pro-max` refreshed to upstream `6ec2bb5`: 11 new form error-handling UX guidelines (141 total), Arabic query synonyms and RTL-safe HTML preview. Script changes read before taking them.
