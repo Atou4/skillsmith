@@ -100,6 +100,19 @@ Licenses, sources and pinned commits are in [`THIRD_PARTY_NOTICES.md`](THIRD_PAR
 
 All four come from [agent-skills-standard](https://github.com/hoangnguyen0403/agent-skills-standard) (MIT). They assume a BLoC-style architecture and, in `flutter-testing` and `flutter-error-handling`, project helpers (`TestWrapper`, `AppLogger` and similar) that you supply or replace. More groups (`frontend`, `backend`, `infra`, `devops`) are added when their first skill is ready; see [`SCOPE.md`](SCOPE.md).
 
+## Good skills we link to instead of copying
+
+Some excellent skills have no redistributable license file, so they are not copied here. Install them from their own repos; `skill-vetter` first, as with any skill.
+
+| Area | Skills | Install |
+|---|---|---|
+| Frontend (React, Next.js) | `react-best-practices`, `composition-patterns`, `react-view-transitions`, `web-design-guidelines` from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | `npx skills add vercel-labs/agent-skills --list`, then pick with `--skill <name>` |
+| Mobile (React Native, Expo) | `react-native-skills` from the same repo | same |
+| Backend (Postgres, auth) | `supabase`, `supabase-postgres-best-practices` from [supabase/agent-skills](https://github.com/supabase/agent-skills) | `npx skills add supabase/agent-skills --list` |
+| Infra (Firebase) | `firebase-*` skills from [firebase/agent-skills](https://github.com/firebase/agent-skills) | `npx skills add firebase/agent-skills --list` |
+
+The `frontend`, `backend` and `infra` packs here will hold original or cleanly licensed skills when they exist; see [`SCOPE.md`](SCOPE.md).
+
 ## Example: `skill-update-check`
 
 ```
