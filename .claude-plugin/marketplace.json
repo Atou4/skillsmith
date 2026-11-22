@@ -10,7 +10,7 @@
       "name": "skillsmith",
       "source": "./skills/meta",
       "description": "Meta skills for managing agent skills: vet, install, audit, sync and update-check them, and route project work to the right skill.",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "category": "productivity",
       "keywords": [
         "skills",
@@ -24,7 +24,7 @@
       "name": "ui-ux",
       "source": "./skills/ui-ux",
       "description": "UI/UX skills by Next Level Builder, Emil Kowalski and Jakub Krehel, included unmodified under MIT: design direction, polish, motion and interaction feel.",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "category": "design",
       "keywords": [
         "ui",
@@ -38,7 +38,7 @@
       "name": "workflows",
       "source": "./skills/workflows",
       "description": "Multi-step engineering workflows: platform-pipeline (PRD to verified build, with a design approval gate) and feature-forge (integrate an external service across several repos, contract first).",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "category": "engineering",
       "keywords": [
         "workflow",
@@ -50,8 +50,8 @@
     {
       "name": "mobile",
       "source": "./skills/mobile",
-      "description": "Skills for building phone and tablet apps, starting with Flutter performance and security.",
-      "version": "0.5.0",
+      "description": "Skills for building phone and tablet apps, starting with Flutter: performance, security, testing and error handling.",
+      "version": "0.5.1",
       "category": "development",
       "keywords": [
         "mobile"

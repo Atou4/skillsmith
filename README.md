@@ -18,7 +18,7 @@ Agent skills for Claude Code and Codex, organized as packs you install separatel
 | [`skillsmith`](skills/meta/) | 6 | Managing agent skills, and routing project work to the right skill |
 | [`ui-ux`](skills/ui-ux/) | 4 | Design direction, polish, motion, interaction feel (third-party, unmodified) |
 | [`workflows`](skills/workflows/) | 2 | Multi-step engineering workflows |
-| [`mobile`](skills/mobile/) | 2 | Phone and tablet apps: Flutter performance and security (third-party, unmodified) |
+| [`mobile`](skills/mobile/) | 4 | Phone and tablet apps: Flutter performance, security, testing and error handling (third-party, unmodified) |
 
 Each pack adds only its own skill descriptions to your sessions, so install the ones you use.
 
@@ -95,8 +95,10 @@ Licenses, sources and pinned commits are in [`THIRD_PARTY_NOTICES.md`](THIRD_PAR
 |---|---|---|
 | [`flutter-performance`](skills/mobile/flutter-performance/SKILL.md) | Hoang Nguyen | You are diagnosing jank, extra rebuilds or slow lists in a Flutter app. |
 | [`flutter-security`](skills/mobile/flutter-security/SKILL.md) | Hoang Nguyen | You are storing tokens or PII, injecting secrets, pinning certificates or hardening a Flutter release build. |
+| [`flutter-testing`](skills/mobile/flutter-testing/SKILL.md) | Hoang Nguyen | You are writing unit, widget and Patrol integration tests, with the robot pattern and widget keys. |
+| [`flutter-error-handling`](skills/mobile/flutter-error-handling/SKILL.md) | Hoang Nguyen | You are turning exceptions into typed failures with `Either` in repositories and folding them in BLoCs. |
 
-Both come from [agent-skills-standard](https://github.com/hoangnguyen0403/agent-skills-standard) (MIT). They assume a BLoC-style architecture in places. More groups (`frontend`, `backend`, `infra`, `devops`) are added when their first skill is ready; see [`SCOPE.md`](SCOPE.md).
+All four come from [agent-skills-standard](https://github.com/hoangnguyen0403/agent-skills-standard) (MIT). They assume a BLoC-style architecture and, in `flutter-testing` and `flutter-error-handling`, project helpers (`TestWrapper`, `AppLogger` and similar) that you supply or replace. More groups (`frontend`, `backend`, `infra`, `devops`) are added when their first skill is ready; see [`SCOPE.md`](SCOPE.md).
 
 ## Example: `skill-update-check`
 

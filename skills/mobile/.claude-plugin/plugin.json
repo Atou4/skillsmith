@@ -1,7 +1,7 @@
 {
   "name": "mobile",
-  "version": "0.5.0",
-  "description": "Skills for building phone and tablet apps, starting with Flutter performance and security.",
+  "version": "0.5.1",
+  "description": "Skills for building phone and tablet apps, starting with Flutter: performance, security, testing and error handling.",
   "author": {
     "name": "Atou4",
     "url": "https://github.com/Atou4"
@@ -13,10 +13,14 @@
     "mobile",
     "flutter",
     "performance",
-    "security"
+    "security",
+    "testing",
+    "error-handling"
   ],
   "skills": [
+    "./flutter-error-handling",
     "./flutter-performance",
-    "./flutter-security"
+    "./flutter-security",
+    "./flutter-testing"
   ]
 }

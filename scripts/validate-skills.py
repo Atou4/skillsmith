@@ -121,6 +121,8 @@ by_source = {os.path.normpath(p.get("source", "")): p for p in market.get("plugi
 plugin_names = set()
 for b in buckets:
     pj_path = os.path.join(ROOT, "skills", b, ".claude-plugin", "plugin.json")
+    if not any(bb == b for bb, _ in skills) and not os.path.exists(os.path.dirname(pj_path)):
+        continue  # reserved empty folder (for example skills/devops/.gitkeep): no skills, no plugin, nothing to publish
     pj = load_json(pj_path)
     if pj is None:
         continue
@@ -183,4 +185,4 @@ for e in vendor.get("skills", []):
 if errors:
     print("\n".join(errors))
     sys.exit(1)
-print(f"OK: {len(skills)} skills in {len(buckets)} plugins validated" + ("" if yaml else " (no PyYAML: strict YAML check skipped)"))
+print(f"OK: {len(skills)} skills in {len(plugin_names)} plugins validated" + ("" if yaml else " (no PyYAML: strict YAML check skipped)"))

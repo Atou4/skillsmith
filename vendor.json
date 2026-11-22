@@ -2,6 +2,46 @@
   "_comment": "Third-party skills vendored unmodified. scripts/check-upstream.py and the skill-update-check skill read this file. Keep THIRD_PARTY_NOTICES.md in step.",
   "skills": [
     {
+      "skill": "flutter-error-handling",
+      "bucket": "mobile",
+      "author": "Hoang Nguyen",
+      "repo": "hoangnguyen0403/agent-skills-standard",
+      "path": "skills/flutter/flutter-error-handling",
+      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
+      "license": "MIT",
+      "copied": "2026-11-22"
+    },
+    {
+      "skill": "flutter-performance",
+      "bucket": "mobile",
+      "author": "Hoang Nguyen",
+      "repo": "hoangnguyen0403/agent-skills-standard",
+      "path": "skills/flutter/flutter-performance",
+      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
+      "license": "MIT",
+      "copied": "2026-11-22"
+    },
+    {
+      "skill": "flutter-security",
+      "bucket": "mobile",
+      "author": "Hoang Nguyen",
+      "repo": "hoangnguyen0403/agent-skills-standard",
+      "path": "skills/flutter/flutter-security",
+      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
+      "license": "MIT",
+      "copied": "2026-11-22"
+    },
+    {
+      "skill": "flutter-testing",
+      "bucket": "mobile",
+      "author": "Hoang Nguyen",
+      "repo": "hoangnguyen0403/agent-skills-standard",
+      "path": "skills/flutter/flutter-testing",
+      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
+      "license": "MIT",
+      "copied": "2026-11-22"
+    },
+    {
       "skill": "better-motion",
       "bucket": "ui-ux",
       "author": "Jakub Krehel",
@@ -40,26 +80,6 @@
       "commit": "2de1134dc4d1cfe112934611ae5803ae17a1bd7e",
       "license": "MIT",
       "copied": "2026-11-20"
-    },
-    {
-      "skill": "flutter-performance",
-      "bucket": "mobile",
-      "author": "Hoang Nguyen",
-      "repo": "hoangnguyen0403/agent-skills-standard",
-      "path": "skills/flutter/flutter-performance",
-      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
-      "license": "MIT",
-      "copied": "2026-11-22"
-    },
-    {
-      "skill": "flutter-security",
-      "bucket": "mobile",
-      "author": "Hoang Nguyen",
-      "repo": "hoangnguyen0403/agent-skills-standard",
-      "path": "skills/flutter/flutter-security",
-      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
-      "license": "MIT",
-      "copied": "2026-11-22"
     }
   ]
 }

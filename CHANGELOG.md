@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 (2026-11-22)
+
+- `mobile`: added `flutter-testing` and `flutter-error-handling` from hoangnguyen0403/agent-skills-standard (MIT), vendored unmodified at `c679e00`. Both assume BLoC and project helpers; the notices list what is missing upstream.
+- Reserved an empty `skills/devops/` folder for the future devops pack. It has no plugin and is not installable.
+
 ## 0.5.0 (2026-11-22)
 
 - New `mobile` pack, the first stack pack, with `flutter-performance` and `flutter-security` from hoangnguyen0403/agent-skills-standard (MIT), vendored unmodified and pinned at `c679e00`. Install with `mobile@skillsmith`.
