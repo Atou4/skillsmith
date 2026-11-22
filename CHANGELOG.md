@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2 (2026-11-22)
+
+- `ui-ux-pro-max` refreshed to upstream `6ec2bb5`: 11 new form error-handling UX guidelines (141 total), Arabic query synonyms and RTL-safe HTML preview. Script changes read before taking them.
+
 ## 0.5.1 (2026-11-22)
 
 - `mobile`: added `flutter-testing` and `flutter-error-handling` from hoangnguyen0403/agent-skills-standard (MIT), vendored unmodified at `c679e00`. Both assume BLoC and project helpers; the notices list what is missing upstream.
