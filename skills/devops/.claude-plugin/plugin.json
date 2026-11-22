@@ -1,0 +1,22 @@
+{
+  "name": "devops",
+  "version": "0.6.0",
+  "description": "Build, ship and run: deploy, verify, roll back and diagnose services, starting with Google Cloud Run.",
+  "author": {
+    "name": "Atou4",
+    "url": "https://github.com/Atou4"
+  },
+  "homepage": "https://github.com/Atou4/skillsmith",
+  "repository": "https://github.com/Atou4/skillsmith",
+  "license": "MIT",
+  "keywords": [
+    "devops",
+    "gcp",
+    "cloud-run",
+    "deploy",
+    "observability"
+  ],
+  "skills": [
+    "./gcp-cloud-run-ops"
+  ]
+}

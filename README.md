@@ -19,6 +19,7 @@ Agent skills for Claude Code and Codex, organized as packs you install separatel
 | [`ui-ux`](skills/ui-ux/) | 4 | Design direction, polish, motion, interaction feel (third-party, unmodified) |
 | [`workflows`](skills/workflows/) | 2 | Multi-step engineering workflows |
 | [`mobile`](skills/mobile/) | 4 | Phone and tablet apps: Flutter performance, security, testing and error handling (third-party, unmodified) |
+| [`devops`](skills/devops/) | 1 | Build, ship and run: deploy, verify, roll back and diagnose Google Cloud Run |
 
 Each pack adds only its own skill descriptions to your sessions, so install the ones you use.
 
@@ -32,6 +33,7 @@ claude plugin install skillsmith@skillsmith      # meta pack
 claude plugin install ui-ux@skillsmith           # optional
 claude plugin install workflows@skillsmith       # optional
 claude plugin install mobile@skillsmith          # optional
+claude plugin install devops@skillsmith          # optional
 ```
 
 **Codex**
@@ -42,6 +44,7 @@ codex plugin add skillsmith@skillsmith
 codex plugin add ui-ux@skillsmith
 codex plugin add workflows@skillsmith
 codex plugin add mobile@skillsmith
+codex plugin add devops@skillsmith
 ```
 
 **Any agent, via the skills CLI**
@@ -98,7 +101,13 @@ Licenses, sources and pinned commits are in [`THIRD_PARTY_NOTICES.md`](THIRD_PAR
 | [`flutter-testing`](skills/mobile/flutter-testing/SKILL.md) | Hoang Nguyen | You are writing unit, widget and Patrol integration tests, with the robot pattern and widget keys. |
 | [`flutter-error-handling`](skills/mobile/flutter-error-handling/SKILL.md) | Hoang Nguyen | You are turning exceptions into typed failures with `Either` in repositories and folding them in BLoCs. |
 
-All four come from [agent-skills-standard](https://github.com/hoangnguyen0403/agent-skills-standard) (MIT). They assume a BLoC-style architecture and, in `flutter-testing` and `flutter-error-handling`, project helpers (`TestWrapper`, `AppLogger` and similar) that you supply or replace. More groups (`frontend`, `backend`, `infra`, `devops`) are added when their first skill is ready; see [`SCOPE.md`](SCOPE.md).
+All four come from [agent-skills-standard](https://github.com/hoangnguyen0403/agent-skills-standard) (MIT). They assume a BLoC-style architecture and, in `flutter-testing` and `flutter-error-handling`, project helpers (`TestWrapper`, `AppLogger` and similar) that you supply or replace. More groups (`frontend`, `backend`, `infra`) are added when their first skill is ready; see [`SCOPE.md`](SCOPE.md).
+
+### `devops`
+
+| Skill | Use it when |
+|---|---|
+| [`gcp-cloud-run-ops`](skills/devops/gcp-cloud-run-ops/SKILL.md) | You deploy, verify, roll back or diagnose Cloud Run services. Images by digest, revisions created without traffic, traffic shifted only after they start, tags cleared so 0% revisions stop billing warm instances, and a production yes before any change. Ships two read-only scripts: a post-deploy check and a cost and traffic snapshot. |
 
 ## Good skills we link to instead of copying
 
