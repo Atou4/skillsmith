@@ -40,6 +40,26 @@
       "commit": "2de1134dc4d1cfe112934611ae5803ae17a1bd7e",
       "license": "MIT",
       "copied": "2026-11-20"
+    },
+    {
+      "skill": "flutter-performance",
+      "bucket": "mobile",
+      "author": "Hoang Nguyen",
+      "repo": "hoangnguyen0403/agent-skills-standard",
+      "path": "skills/flutter/flutter-performance",
+      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
+      "license": "MIT",
+      "copied": "2026-11-22"
+    },
+    {
+      "skill": "flutter-security",
+      "bucket": "mobile",
+      "author": "Hoang Nguyen",
+      "repo": "hoangnguyen0403/agent-skills-standard",
+      "path": "skills/flutter/flutter-security",
+      "commit": "c679e0032fbebf4eed90db0f2fc4f52541a3f23d",
+      "license": "MIT",
+      "copied": "2026-11-22"
     }
   ]
 }

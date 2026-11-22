@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0 (2026-11-22)
+
+- New `mobile` pack, the first stack pack, with `flutter-performance` and `flutter-security` from hoangnguyen0403/agent-skills-standard (MIT), vendored unmodified and pinned at `c679e00`. Install with `mobile@skillsmith`.
+
 ## 0.4.1 (2026-11-20)
 
 - Logo and icon: every pack now ships a square `icon.png`, the README has a header logo, and `assets/brand/` holds the logo, icon and social preview image.

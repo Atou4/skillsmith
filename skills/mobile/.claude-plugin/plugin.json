@@ -1,0 +1,22 @@
+{
+  "name": "mobile",
+  "version": "0.5.0",
+  "description": "Skills for building phone and tablet apps, starting with Flutter performance and security.",
+  "author": {
+    "name": "Atou4",
+    "url": "https://github.com/Atou4"
+  },
+  "homepage": "https://github.com/Atou4/skillsmith",
+  "repository": "https://github.com/Atou4/skillsmith",
+  "license": "MIT",
+  "keywords": [
+    "mobile",
+    "flutter",
+    "performance",
+    "security"
+  ],
+  "skills": [
+    "./flutter-performance",
+    "./flutter-security"
+  ]
+}

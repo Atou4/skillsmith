@@ -18,6 +18,7 @@ Agent skills for Claude Code and Codex, organized as packs you install separatel
 | [`skillsmith`](skills/meta/) | 6 | Managing agent skills, and routing project work to the right skill |
 | [`ui-ux`](skills/ui-ux/) | 4 | Design direction, polish, motion, interaction feel (third-party, unmodified) |
 | [`workflows`](skills/workflows/) | 2 | Multi-step engineering workflows |
+| [`mobile`](skills/mobile/) | 2 | Phone and tablet apps: Flutter performance and security (third-party, unmodified) |
 
 Each pack adds only its own skill descriptions to your sessions, so install the ones you use.
 
@@ -30,6 +31,7 @@ claude plugin marketplace add Atou4/skillsmith
 claude plugin install skillsmith@skillsmith      # meta pack
 claude plugin install ui-ux@skillsmith           # optional
 claude plugin install workflows@skillsmith       # optional
+claude plugin install mobile@skillsmith          # optional
 ```
 
 **Codex**
@@ -39,6 +41,7 @@ codex plugin marketplace add Atou4/skillsmith
 codex plugin add skillsmith@skillsmith
 codex plugin add ui-ux@skillsmith
 codex plugin add workflows@skillsmith
+codex plugin add mobile@skillsmith
 ```
 
 **Any agent, via the skills CLI**
@@ -85,6 +88,15 @@ Licenses, sources and pinned commits are in [`THIRD_PARTY_NOTICES.md`](THIRD_PAR
 |---|---|
 | [`platform-pipeline`](skills/workflows/platform-pipeline/SKILL.md) | You are building a product from scratch, or adding the next feature to it. PRD, real artboards, a hard approval gate, visual research, then a build verified in the running app. |
 | [`feature-forge`](skills/workflows/feature-forge/SKILL.md) | You are integrating an external service (payments, auth, messaging) across several repos you own. Pins the shared contract first, grills it against failure modes that cost money or trust, and builds the verification harness before the handler. |
+
+### `mobile`: third-party, included unmodified
+
+| Skill | By | Use it when |
+|---|---|---|
+| [`flutter-performance`](skills/mobile/flutter-performance/SKILL.md) | Hoang Nguyen | You are diagnosing jank, extra rebuilds or slow lists in a Flutter app. |
+| [`flutter-security`](skills/mobile/flutter-security/SKILL.md) | Hoang Nguyen | You are storing tokens or PII, injecting secrets, pinning certificates or hardening a Flutter release build. |
+
+Both come from [agent-skills-standard](https://github.com/hoangnguyen0403/agent-skills-standard) (MIT). They assume a BLoC-style architecture in places. More groups (`frontend`, `backend`, `infra`, `devops`) are added when their first skill is ready; see [`SCOPE.md`](SCOPE.md).
 
 ## Example: `skill-update-check`
 
